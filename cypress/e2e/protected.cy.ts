@@ -1,9 +1,9 @@
-describe("NextAuth - Admin", () => {
+describe("NextAuth - Protected", () => {
   const user = "userA";
   before(() => {
     cy.setNextAuthSessionToken(user);
   });
-  it("passes", () => {
+  it("displays the protected page with user information", () => {
     cy.visit("/protected");
 
     cy.get("h1").should("contain", "Protected Page");
