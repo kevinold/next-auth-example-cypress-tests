@@ -10,13 +10,15 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "cy:open": "export NEXTAUTH_URL='http://localhost:3000'; export NEXTAUTH _SECRET='12345'; cypress open --e2e"
+    "cy:open": "cypress open --e2e",
+    "cy:run": "cypress run --e2e"
   },
   "author": "Iain Collins <me@iaincollins.com>",
   "contributors": [
     "Balázs Orbán <info@balazsorban.com>",
     "Nico Domino <yo@ndo.dev>",
-    "Lluis Agusti <hi@llu.lu>"
+    "Lluis Agusti <hi@llu.lu>",
+    "Kevin Old <kevin@kevinold.com>"
   ],
   "dependencies": {
     "next": "latest",
@@ -28,6 +30,7 @@
     "@types/node": "^18.16.2",
     "@types/react": "^18.2.0",
     "cypress": "^13.1.0",
+    "dotenv": "^16.3.1",
     "typescript": "5.2.2"
   },
   "prettier": {}
