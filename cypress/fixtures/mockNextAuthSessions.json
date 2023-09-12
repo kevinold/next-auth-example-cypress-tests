@@ -4,7 +4,8 @@
       "name": "Admin",
       "email": "admin@example.com",
       "image": "https://lh3.googleusercontent.com/a/ACg8ocIS9AQajSojhwB4WBNAz6-j8SaoKzMhPNsP8Wc_WUEr=s96-c",
-      "id": "108441334455827861448"
+      "id": "108441334455827861448",
+      "userRole": "admin"
     },
     "expires": "1223434536456"
   },
