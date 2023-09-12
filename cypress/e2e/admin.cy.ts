@@ -1,7 +1,7 @@
 describe("NextAuth - Admin", () => {
   before(() => {
     cy.fixture("mockNextAuthSessions").then(async (mockSessions) => {
-      const token = mockSessions.adminJwt;
+      const token = mockSessions.admin;
 
       cy.task("encodeJwt", token).then((jwt) => {
         cy.setCookie("next-auth.session-token", jwt);

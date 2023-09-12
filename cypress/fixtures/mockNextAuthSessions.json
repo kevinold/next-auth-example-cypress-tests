@@ -1,44 +1,28 @@
 {
-  "adminJwt": {
+  "admin": {
     "name": "Admin",
     "email": "admin@example.com",
     "image": "https://lh3.googleusercontent.com/a/ACg8ocIS9AQajSojhwB4WBNAz6-j8SaoKzMhPNsP8Wc_WUEr=s96-c",
     "id": "108441334455827861448",
     "userRole": "admin"
   },
-  "admin": {
-    "user": {
-      "name": "Admin",
-      "email": "admin@example.com",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocIS9AQajSojhwB4WBNAz6-j8SaoKzMhPNsP8Wc_WUEr=s96-c",
-      "id": "108441334455827861448",
-      "userRole": "admin"
-    },
-    "expires": "1223434536456"
-  },
   "userA": {
-    "user": {
-      "name": "User A",
-      "email": "user-a@example.com",
-      "image": "https://i.pravatar.cc/300",
-      "id": "108441334455827861448",
-      "group": "uZ13_tZPeVQUMdsmXJzGg",
-      "isInAGroup": true,
-      "ownsGroup": false
-    },
-    "expires": "1223434536456"
+    "name": "User A",
+    "email": "user-a@example.com",
+    "image": "https://i.pravatar.cc/300",
+    "id": "108441334455827861448",
+    "group": "uZ13_tZPeVQUMdsmXJzGg",
+    "isInAGroup": true,
+    "ownsGroup": false
   },
   "userB": {
-    "user": {
-      "name": "User B",
-      "email": "user-b@example.com",
-      "image": "https://i.pravatar.cc/300",
-      "id": "582786144810844133345",
-      "group": "VQUMdsmXJzGguZ13_tZPe",
-      "isInAGroup": false,
-      "ownsGroup": false
-    },
-    "expires": "1223434536456"
+    "name": "User B",
+    "email": "user-b@example.com",
+    "image": "https://i.pravatar.cc/300",
+    "id": "582786144810844133345",
+    "group": "VQUMdsmXJzGguZ13_tZPe",
+    "isInAGroup": false,
+    "ownsGroup": false
   },
-  "expiredSession": {}
+  "emptyExpiredSession": {}
 }
