@@ -1,36 +1,25 @@
+import { encode } from "next-auth/jwt";
 describe('NextAuth - Admin', () => {
   before(() => {
 
-    cy.setCookie('next-auth.session-token', "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..uFc8bmJwftldFb3c.Kijn8KXCj0FR-j4lc6WCw9wayuwjWHmmw7eqtU4dDFkl7CcIXxNJUxtoVOpFfK1ofz74B2kjzOZ5tm2WaQ88x9sSQVLc1vlLNbrwD97S4AfdtiSRMLRiPxqd9Ctehc9nv-UNFQEzMjE6Xpn9BDTzCbex4cFR7KCrJcYlDHQTOufec_y8riP9xydxv8A00L2Y3McU45HfTvg65nBR5WYoIxuHzgSnWCFXhguWYN8M86gkiKvAhIfxxm8N6OLjqLXaxZCCcPrwYcTIgKLyk9P5vwBTyf9wp2paRRa-aGhRyHiNp_AXVFw-klgmKIrC8BqTGBAuVor2AGdUDkipnRKbp78jgERlkpE9MXwnt55R-ZoVmWwQoVifk0-UZIfVARpurg5f5dFYxNkGJwuxxzycGgM87UGQvwxlTGPV1md8_zv80x-P0eVc2Z7ySQ.HRT_IkAZryb-zQuVd16KAQ")
+    //cy.setCookie('next-auth.session-token', "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..gxNUKPiT3Ta8HO8B.EmpAuvlQ8s6Ul9bqikjxxZRN8-8yjuYRWW2f468Ct89Bb5OqYWC_z4n1zKX1BDqA6KAYV_mXhIU6VEDIcI3zyLXAPVLjvByKh0RjgJLIylTCUWJz-HalYbU20HQR6ycKLfCCSCzh5owi-Ww2wt0NabWndmicOP7YmldlcsI21JgeBLfHmBzMQC4oPcGEaktjRJPDTGL1CTSpoUmWxZiWcpB7Iyzr3MnS8sMPaodcfKu_eX7vFK-XFWE93GDbXewdisTDBslj3WAgOX9ItmY7c54jvhDzrl_1dRecWknoAwirD2H0SDzu4zxn3cXJ_o13WBvDrptUUSMfuuGLNFoG-_9eAGBxLq8csBzgidf9WnBSOYiO7_OdpbifPuCu3CRdCfF3_8dccw1rRxDeDXXpOOf34Ln8IrSrvlx2u0dOp2OOxiB9UVL-CiWnwGKIv3iskD0z8X_Rqb9IO4qTWJc.lYYRaJq1M961LEaMX-mOFQ")
     // cy.setCookie('next-auth.callback-url', 'http%3A%2F%2Flocalhost%3A3000%2F')
     // cy.setCookie('next-auth.csrf-token', '300c1cec6b7b92311af72bdaa011bcbc4eb659d65401eb398a23db8ad2168f1e%7C846fc5ff120f42f80dbb2f895e79d143b421879bf990e330a9ca5bf7fe382cb2')
-    cy.intercept({url: '/admin', middleware: true}, (req) => {
-      req.continue((res) => {
-        // 'res' represents the real destination response
-        // you can manipulate 'res' before it's sent to the browser
-        res.statusCode = 200
-        res.headers.location = '/admin'
-      })
-      // req.reply((res) => {
-      //   expect(res.statusCode).to.equal(307)
-      //   // the server wants to redirect us to another domain
-      //   expect(res.headers).to.have.property('location', '/api/auth/signin?callbackUrl=%2Fadmin')
-      //   res.statusCode = 200
-      //   res.headers.location = '/admin'
-      //   // need to provide something for the updated "res"
-      //   // object to be used
-      //   // https://github.com/cypress-io/cypress/issues/9555
-      //   res.send(200, 'stay here')
-      // })
-    })
+    cy.fixture("mockNextAuthSessions").then(async (mockSessions) => {
+      const adminJWT = mockSessions["adminJWT"];
 
-    cy.fixture("mockNextAuthSessions").then((mockSessions) => {
-      cy.intercept("GET", "/api/auth/session", {
-        statusCode: 200,
-        body: {
-          ...mockSessions["admin"],
-        },
-      }).as("getMockedSession");
+      const signedAdminJWT = await encode({
+        token:adminJWT,
+        secret: process.env.NEXTAUTH_SECRET,
+        maxAge: 30 * 365 * 24 * 60 * 60 // 30 years
+      })
+      cy.setCookie('next-auth.session-token', signedAdminJWT)
+      // cy.intercept("GET", "/api/auth/session", {
+      //   statusCode: 200,
+      //   body: {
+      //     ...mockSessions["admin"],
+      //   },
+      // }).as("getMockedSession");
     });
     // cy.intercept('/admin', (req) => {
     //   // dynamically get billing plan name at request-time
