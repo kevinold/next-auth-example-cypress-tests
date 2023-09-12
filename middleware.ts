@@ -6,14 +6,12 @@ export default withAuth({
     authorized({ req, token }) {
       // `/admin` requires admin role
       if (req.nextUrl.pathname === "/admin") {
-        console.log("req", req);
-        console.log("token", token);
-        return token?.userRole === "admin"
+        return token?.userRole === "admin";
       }
       // `/me` only requires the user to be logged in
-      return !!token
+      return !!token;
     },
   },
-})
+});
 
-export const config = { matcher: ["/admin", "/me"] }
+export const config = { matcher: ["/admin", "/me"] };
